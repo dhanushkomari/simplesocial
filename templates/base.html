@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>SimpleSocial</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static 'simplesocial/css/master.css' %}">
+</head>
+<body>
+    <nav class="navbar mynav" id="navbar">
+        <div class="container">
+            <a class="navabar-brand mynav" href="{% url 'home' %}">StarSocial</a>
+            <ul class='nav navabr-nav navbar-right'>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'posts:all' %}">Post</a></li>
+                    <li><a href="{% url 'groups:all' %}">Groups</a></li>
+                    <li><a href="{% url 'groups:create' %}">Create Group</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+                {% else %}
+                    <li><a href="{% url 'groups:all' %}">Groups</a></li>
+                    <li><a href="{% url 'accounts:login' %}">LogIn</a></li>
+                    <li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+<div class="container">
+    <br><br>
+    {% block content %}
+    {% endblock %}    
+</div>
+</body>
+</html>
